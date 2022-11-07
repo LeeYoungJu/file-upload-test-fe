@@ -3,3 +3,7 @@ body {
   color: #ddd;
   padding: 20px;
 }
+
+.file {
+  display: flex;
+}

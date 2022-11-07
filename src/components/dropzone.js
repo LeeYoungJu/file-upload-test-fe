@@ -196,7 +196,7 @@ const DropZone = ({}) => {
                             <FileNameDiv className='name'>{file.name}</FileNameDiv>
                             <ProgressDiv style={{
                                 width: progress+'%'
-                            }}>{progress}%</ProgressDiv>
+                            }}>{Math.round(progress)}%</ProgressDiv>
                         </a>
                     )
                 })}
@@ -204,7 +204,7 @@ const DropZone = ({}) => {
             {
                 startDate && endDate && (
                     <UploadTimeDiv>
-                        {Math.round((endDate.getTime() - startDate.getTime())/1000)}
+                        소요시간(초) : {Math.round((endDate.getTime() - startDate.getTime())/1000)}
                     </UploadTimeDiv>
                 )
             }

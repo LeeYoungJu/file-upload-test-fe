@@ -35,6 +35,9 @@ const DropZoneMultipart = ({}) => {
     }, [files.length]);
 
     const sendFile = () => {    
+        setStartDate(null);
+        setEndDate(null);
+        
         const now = new Date();
         setStartDate(now);
 
@@ -43,7 +46,7 @@ const DropZoneMultipart = ({}) => {
         const formData = new FormData();
         formData.append('file', files[0]);
         
-        const url = 'upload/file';
+        const url = 'upload/dataset/';
 
         const promise = apiService.postForm(url, formData, (e) => {
             const percentage = (e.loaded * 100) / e.total;
@@ -63,8 +66,8 @@ const DropZoneMultipart = ({}) => {
     const resetData = () => {
         setFiles([]);
         setProgress(0);
-        setStartDate(null);
-        setEndDate(null);
+        // setStartDate(null);
+        // setEndDate(null);
     };
 
     return (
@@ -87,18 +90,28 @@ const DropZoneMultipart = ({}) => {
 
             </DropZoneDiv>    
             <FileDiv>
-                {
-                    progress && (
-                        <ProgressDiv style={{
-                            width: progress+'%'
-                        }}>{progress}%</ProgressDiv>
+                {files.map((file) => {                    
+                    return (
+                        <a key={file.name} className='file' target="_blank">
+                            <FileNameDiv className='name'>{file.name}</FileNameDiv>
+                            <ProgressDiv style={{
+                                width: progress+'%'
+                            }}>{Math.round(progress)}%</ProgressDiv>
+                        </a>
                     )
-                }                
+                })}
             </FileDiv>
+            {
+                progress === 100 && (
+                    <div>
+                        Please wait...
+                    </div>
+                )
+            }
             {
                 startDate && endDate && (
                     <UploadTimeDiv>
-                        {Math.round((endDate.getTime() - startDate.getTime())/1000)}
+                        소요시간(초) : {Math.round((endDate.getTime() - startDate.getTime())/1000)}
                     </UploadTimeDiv>
                 )
             }

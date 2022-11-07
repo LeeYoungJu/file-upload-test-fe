@@ -6,7 +6,7 @@ function App() {
     <div>      
       <h1>1. Chunk</h1>
       <Dropzone></Dropzone>      
-      <h2>2. Multipart</h2>
+      <h1>2. Multipart</h1>
       <DropZoneMultipart></DropZoneMultipart>
     </div>
   );
